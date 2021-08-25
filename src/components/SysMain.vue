@@ -1,14 +1,19 @@
 <template>
   <div class="main-content">
+  <SysTabs></SysTabs>
   </div>
 </template>
 <script>
+import SysTabs from '../components/SysTabs.vue'
 export default {
   data() {
     return {
       
     }
   },
+  components:{
+    SysTabs
+  }
 }
 </script>
 <style scoped>

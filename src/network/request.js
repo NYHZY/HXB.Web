@@ -1,7 +1,7 @@
 import axios from 'axios'
 const service=axios.create({
     //10.0.0.124
-    baseURL:'https://localhost:5001',
+    baseURL:'https://localhost:5001/api/',
     // timeout:5000,
     responseType:'json',
     headers:{

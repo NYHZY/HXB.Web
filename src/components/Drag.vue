@@ -1,8 +1,5 @@
 <template>
-  <div class="box">
-    <div class="div_left"></div>
-    <div class="dragline"></div>
-    <div class="div_right"></div>
+  <div class="drag">
   </div>
 </template>
 <script>
@@ -15,11 +12,10 @@ export default {
 }
 </script>
 <style scoped>
-.box{
-  display: flex;
-}
-.dragline{
-  widows: 1px;
-  
+.drag{
+  width: 20px;
+  background-color: violet;
+  height: 100%;
+  cursor: ew-resize;
 }
 </style>
