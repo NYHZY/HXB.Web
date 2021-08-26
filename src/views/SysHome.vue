@@ -2,31 +2,18 @@
  <div class="syshome">
  <Header @asideCollapse="controlaside"></Header>
  <div class="container">
-   <Aside :isCollapse='isCollapse' :homevue="homevue"></Aside>
+  <Aside :isCollapse='isCollapse' :homevue="homevue"></Aside>
    <div class="tab">
-     <div class="content-box">
-       <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab">
+       <el-tabs v-model="editableTabsValue" type="card" closable @tab-remove="removeTab" @tab-click="rightclick($event)" @contextmenu.prevent.capture>
         <el-tab-pane
           v-for="item in editableTabs"
           :key="item.id"
           :label="item.title"
           :name="item.name"
-        >
-        {{item.content}}
-        </el-tab-pane>
+          @click="rightclick">
+        <component :is="key"></component>
+        </el-tab-pane> 
       </el-tabs>
-     </div>
-    <div class="dropdown">
-      <el-dropdown>
-        <span class="el-dropdown-link">关闭<i class="el-icon-arrow-down el-icon--right"></i></span>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item><span>关闭当前</span></el-dropdown-item>
-          <el-dropdown-item><span>关闭其他</span></el-dropdown-item>
-          <el-dropdown-item><span>关闭左侧</span></el-dropdown-item>
-          <el-dropdown-item><span>关闭右侧</span></el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-    </div>
    </div>
  </div>
  </div>
@@ -36,6 +23,7 @@ import Aside from '../components/SysAside.vue'
 import Header from '../components/Header.vue'
 import SysMain from '../components/SysMain.vue'
 import Drag from '../components/Drag.vue'
+import PDataTable from '../components/DynamicTable/PDataTable.vue'
 export default {
   data() {
     return {
@@ -43,8 +31,9 @@ export default {
       startx:0,
       homevue:this,
       editableTabsValue: '2',
-        editableTabs: [],
-        tabIndex: 0
+      editableTabs: [],
+      tabIndex: 0,
+      key:'PDataTable'
     }
   },
   methods:{
@@ -98,13 +87,17 @@ export default {
         }
         this.editableTabsValue = activeName;
         this.editableTabs = tabs.filter(tab => tab.name !== targetName);
+      },
+      rightclick(){
+        console.log("鼠标右击了")
       }
   },
   components:{
     Aside,
     SysMain,
     Header,
-    Drag
+    Drag,
+    PDataTable
   }
 }
 </script>
@@ -112,18 +105,16 @@ export default {
 .syshome{
   width: 100%;
   height: 100%;
-  position:absolute;
 }
 .container{
-  width: 100%;
-  height: 100%;
   display: flex;
-  position: relative;
+  width: 100%;
+  height: calc(100% - 60px);
 }
 .tab{
-  display: flex;
   flex: 1;
-  border-bottom: 1px solid #dcdfe6;
+  width: 100%;
+  height: 100%;
 }
 .content-box{
   position: relative;
@@ -151,11 +142,19 @@ export default {
 .tab>>>.el-tabs--card>.el-tabs__header .el-tabs__nav{
   border: none !important;
   height: 40px;
-  widows: 100%;
+  width: 100%;
   line-height: 40px;
 }
-.tab>>>.el-tabs--card>.el-tabs__header>.el-tabs__nav-wrap .el-tabs__content {
-  position: absolute !important;
+.tab>>>.el-tabs{
+  width: 100%;
+  height:100%;
 }
-
+.tab>>>.el-tabs>.el-tabs__content{
+  height:calc(100% - 55px);;
+}
+.tab>>>.el-tabs>.el-tabs__content>.el-tab-pane{
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
 </style>

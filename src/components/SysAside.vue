@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="hxb-aside">
   <el-menu default-active="1-4-1" 
     class="el-menu-vertical-demo" 
     :collapse="isCollapse" 
