@@ -1,5 +1,5 @@
 <template>
-  <div class="header-top">
+  <el-header class="header-top">
     <div class="header-icon">
       <i :class="isfullscreen?'el-icon-s-fold el-icon-s-fold-transfrom':'el-icon-s-unfold el-icon-s-fold-transfrom1'" @click="AsideCollapse"></i>
     </div>
@@ -25,7 +25,7 @@
       </el-dropdown-menu>
     </el-dropdown>
     </div>
-  </div>
+  </el-header>
 </template>
 <script>
 export default {

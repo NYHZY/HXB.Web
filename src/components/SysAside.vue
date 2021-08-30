@@ -1,10 +1,10 @@
 <template>
 <div class="hxb-aside">
   <el-menu default-active="1-4-1" 
-    class="el-menu-vertical-demo" 
     :collapse="isCollapse" 
     background-color="#303133"
     text-color="#fff"
+    :style="'width:'+width"
     >
       <SysMenu :menuPanle="menuPanle" :menuList="menulist" :isCollapse="isCollapse"></SysMenu>
   </el-menu>
@@ -19,7 +19,8 @@ export default {
       homevue:{
         type: Object,
             default: () => { }
-      }
+      },
+      width:String
     },
   data() {
     return {

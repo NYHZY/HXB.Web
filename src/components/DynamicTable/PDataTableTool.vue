@@ -1,7 +1,7 @@
 <template>
   <div class="hxb-pdatatabletool">
     <div class="hxb-pdatatabletool-btn">
-      <el-button size="mini" type="primary" @click="addData">新增</el-button>
+      <el-button size="mini" type="primary" @click="addRowData">新增</el-button>
 			<el-button size="mini" type="success" @click="saveData">保存</el-button>
 			<el-button size="mini" type="danger" @click="delData">删除</el-button>
 			<!-- 分割线 -->
@@ -54,6 +54,12 @@
 
 <script>
 export default {
+  props:{
+    gridParams:{
+        type: Object,
+            default: () => { }
+      },
+  },
   data() {
     return {
       options:[
@@ -77,15 +83,36 @@ export default {
       tooldata:{
         PageIndex:1,
         PageSize:10
+      },
+      changedata:{
+        pageid:0,
+        addlist:[],
+        udplist:[]
       }
     }
   },
   methods:{
-    addData(){
+    addRowData(){
         //新增行
+        var data = Object.assign({}, this.gridParams.gridaddData, { ColumnStatus: 1 });
+        this.gridParams.gridApi.api.updateRowData({ add: [data] });
       },
-      saveData(){
-        //保存
+      async saveData(){
+       this.gridParams.gridApi.api.stopEditing();
+        this.gridParams.gridApi.api.forEachNode((_node, _idx) => {
+          switch(_node.data.ColumnStatus){
+            case 1:
+              this.changedata.addlist(_node.data);
+              break;
+            case 2:
+              this.changedata.addlist(_node.data);
+            break;
+          }
+        });
+        if(this.changedata.udplist.length!=0&&this.changedata.addlist.length!=0){
+          //发起保存
+          //const res = await this.$Http.post("page/savedata",this.changedata);
+        }
       },
       delData(){
         //删除
@@ -103,9 +130,9 @@ export default {
     margin-right: 20px;
   }
 .pageract {
-            padding: 5px 5px;
-            border: 0px;
-        }
+    padding: 5px 5px;
+    border: 0px;
+}
 span{
   font-size: 12px;
 }
