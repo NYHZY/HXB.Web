@@ -24,21 +24,35 @@ export default {
     loginState:''
     }
   },
+  created(){
+    //this.test();
+  },
   methods:{
     async Login(){
-      const res =await this.$Http.get("/api/login/login",{LoginName:this.LoginParams.LoginName,LoginPwd:this.LoginParams.LoginPwd});
+      const res =await this.$Http.get("/user/login",{LoginName:this.LoginParams.LoginName,LoginPwd:this.LoginParams.LoginPwd});
       if(res.statusCode==200){
-        console.log(res.data.model)
-        // this.$store.dispatch("updatetuserinfo",res.data.model);
-        // this.$store.dispatch("updatetoken",res.data.token);
         sessionStorage.setItem("token",res.data.token);
-        sessionStorage.setItem("userinfo",JSON.stringify(res.data.model));
+        sessionStorage.setItem("userinfo",JSON.stringify(res.data));
+        this.$message({
+          showClose: true,
+          message: res.resMsg,
+          type: 'success'
+        });
         this.$router.push('/home')
+      }else{
+        this.$message({
+          showClose: true,
+          message: res.resMsg,
+          type: 'error'
+        });
       }
-      console.log(res)
     },
     settoken(){
       //this.$store.commit("settoken",res.data.token);
+    },
+    async test(){
+      const res =await this.$Http.post("/test/aa",{cc:"1",vv:"2"});
+      console.log(res);
     }
   }
 }

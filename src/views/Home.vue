@@ -157,19 +157,6 @@ export default {
 .hxb-aside{
   height: 100%;
 }
-.tab {
-  height: 100%;
-}
-.tab >>> .el-tabs {
-  width: 100%;
-  height: 100%;
-}
-.tab >>> .el-tabs > .el-tabs__content {
-  height: calc(100% - 55px);
-}
-.tab >>> .el-tabs > .el-tabs__content > .el-tab-pane {
-  height: 100%;
-}
 .tab >>> .el-tabs__item {
   height: 35px !important;
   line-height: 35px !important;
@@ -186,8 +173,5 @@ export default {
 .tab >>> .el-tabs--card > .el-tabs__header .el-tabs__nav{
   border: none;
 }
-.tab >>> .el-tabs__header {
-  height: 40px;
-  position: relative;
-}
+
 </style>

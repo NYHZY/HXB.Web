@@ -1,6 +1,6 @@
 <template>
   <div class="p-table-header">
-	<div class="title" :style='titleStyle'>{{params.Text}} </div>
+	<div class="title" :style='titleStyle'>{{params.columnText}} </div>
 </div>
 </template>
 
@@ -13,8 +13,6 @@ export default {
   },
   created(){
     this.titleStyle["text-align"]=this.params.TextAlgin
-
-    console.log(this.titleStyle["text-align"])
   }
 }
 </script>

@@ -1,11 +1,10 @@
 <template>
-<div class="hxb-aside">
+<div class="hxb-aside" :style="isCollapse?'width:65px;-webkit-transition: width 0.3s;transition: width 0.3s;':'width:'+width+';'">
   <el-menu default-active="1-4-1" 
     :collapse="isCollapse" 
     background-color="#303133"
     text-color="#fff"
-    :style="'width:'+width"
-    >
+    :style="'width:'+width+';-webkit-transition: width 0.3s;transition: width 0.3s;'">
       <SysMenu :menuPanle="menuPanle" :menuList="menulist" :isCollapse="isCollapse"></SysMenu>
   </el-menu>
 </div>
@@ -38,6 +37,7 @@ export default {
             icon:item.icon,
             menuname:item.menuname,
             leaf:item.leaf>0?true:false,
+            data:item,
             isload:false
           }
           if(obj.leaf){
@@ -48,6 +48,7 @@ export default {
       }
     },
     async getMenu(item){
+      let _this=this;
       if(!item.isload){
         const res =await this.$Http.get("menu/menu-list",{systemid:10000,menuid:item.id});
         if(res.statusCode==200){
@@ -57,6 +58,7 @@ export default {
               icon:_item.icon,
               menuname:_item.menuname,
               leaf:_item.leaf>0?true:false,
+              data:_item,
               isload:false
             }
             if(obj.leaf){
@@ -86,9 +88,13 @@ export default {
 }
 </script>
 <style scoped>
+.hxb-aside{
+  height: 100%;
+  overflow: hidden;
+}
 .aside-left{
   text-align: center;
-  background: rgb(229, 241, 237); 
+  background: #F2F6FC; 
   -webkit-transition: width 0.4s;
   transition: width 0.4s;
   transition-timing-function: ease-out;

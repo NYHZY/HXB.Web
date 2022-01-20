@@ -17,9 +17,8 @@
             :key="item.id"
             :label="item.title"
             :name="item.name"
-            @click="rightclick"
-          >
-            <component :is="key"></component>
+            @click="rightclick">
+            <component :is="item.linktext" v-bind="item.linkconfig"></component>
           </el-tab-pane>
         </el-tabs>
       </div>
@@ -55,6 +54,7 @@ export default {
       console.log(e.x);
     },
     addTab(item) {
+      let _this=this;
       if (!item.leaf) {
         if (
           this.editableTabs.some((it) => {
@@ -63,13 +63,23 @@ export default {
         ) {
           this.editableTabsValue = item.id + "";
         } else {
+          let linkconfig=_this.$common.getStrObjSync(item.data.linkconfig);
+          linkconfig.homePanel=_this;
           let newTabName = item.id + "";
-          this.editableTabs.push({
+          let _obj={
             id: item.id,
             title: item.menuname,
             name: newTabName,
-            content: item.menuname,
-          });
+            linktype:item.data.linktype,
+            linkconfig:linkconfig,
+            content: item.menuname
+          }
+          switch(Number(item.data.linktype)){
+            case 1:
+              _obj.linktext=item.data.linktext;
+              break;
+          }
+          this.editableTabs.push(_obj);
           this.editableTabsValue = newTabName;
         }
         // let newTabName = item.id + '';
@@ -102,13 +112,13 @@ export default {
       console.log("鼠标右击了");
     },
   },
-  components: {
-    Aside,
-    SysMain,
-    Header,
-    Drag,
-    PDataTable,
-  },
+  // components: {
+  //   Aside,
+  //   SysMain,
+  //   Header,
+  //   Drag,
+  //   PDataTable,
+  // },
 };
 </script>
 <style scoped>

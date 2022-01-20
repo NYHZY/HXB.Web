@@ -40,6 +40,8 @@ export default {
       
     }
   },
+  mounted(){
+  },
   methods:{
     click(item){
       this.menuPanle.itemClick(item);

@@ -6,11 +6,24 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style>
+      .el-dialog__body{
+        position: relative;
+        flex: 1;
+      }
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+      }
+
+      input[type="number"] {
+          -moz-appearance: textfield;
+      }
+    </style>
+    <script src="./common.js"></script>
   </head>
   <body>
-    <noscript>
-      <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
+    
     <div id="app"></div>
     <!-- built files will be auto injected -->
   </body>

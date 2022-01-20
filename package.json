@@ -8,9 +8,12 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
+    "dayjs": "^1.10.7",
     "element-ui": "^2.15.5",
     "less": "^4.1.1",
     "less-loader": "^10.0.1",
+    "monaco-editor": "^0.27.0",
+    "qs": "^6.10.1",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.6",
     "vue-property-decorator": "^9.1.2",
@@ -21,8 +24,9 @@
     "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "ag-grid-community": "^26.0.0",
-    "ag-grid-vue": "^26.0.0",
+    "ag-grid-community": "^26.2.0",
+    "ag-grid-vue": "^26.2.0",
+    "monaco-editor-webpack-plugin": "^6.0.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

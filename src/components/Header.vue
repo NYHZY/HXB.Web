@@ -95,7 +95,6 @@ export default {
   cursor: pointer;
 }
 .el-icon-s-fold-transfrom{
-  transition: transform 0.3s;
   transform:rotate(180deg);
   -ms-transform:rotate(180deg); 	
   -moz-transform:rotate(180deg); 	
@@ -103,7 +102,6 @@ export default {
   -o-transform:rotate(180deg);
 }
 .el-icon-s-fold-transfrom1{
-  transition: transform 0.3s;
   transform:rotate(-180deg);
   -ms-transform:rotate(-180deg); 	
   -moz-transform:rotate(-180deg); 	

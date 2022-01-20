@@ -26,7 +26,9 @@ const http ={
           method: 'post',
           url:url
       }
-      if(params) config.data = params
+      if(params) config.data = {
+        ...params
+      }
       return request(config)
   },
   put(url,params){

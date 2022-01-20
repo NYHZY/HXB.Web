@@ -1,16 +1,34 @@
 import axios from 'axios'
+import Qs from 'qs'
 const service=axios.create({
     //10.0.0.124
+    //https://localhost:5001/api/
     baseURL:'https://localhost:5001/api/',
+    transformRequest:[ (data,config)=>{
+      if (!config["Content-Type"]) return Qs.stringify(data);
+        switch (config["Content-Type"].toLowerCase()) {
+            case "application/json;charset=utf-8": {
+                return JSON.stringify(data);
+            }
+            case "multipart/form-data;charset=utf-8": {
+                return data;
+            }
+            default: {
+                return Qs.stringify(data);
+            }
+        }
+    }],
     // timeout:5000,
-    responseType:'json',
+    //responseType:'json',
+    //application/x-www-form-urlencoded;charset=UTF-8
     headers:{
-        'Content-Type':'application/json;charset=utf-8'
+        'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'
+        
     }
 })
 //请求拦截
 service.interceptors.request.use(config=>{
-    // config.headers.Authorization=window.sessionStorage.getItem('token');
+    config.headers.Authorization=sessionStorage.getItem('token')?sessionStorage.getItem('token'):'';
     return config
 })
 service.interceptors.response.use(res=>{
@@ -60,7 +78,8 @@ service.interceptors.response.use(res=>{
         break;
       default:
         error.message = `连接错误${error.response.status}`
-        break;}
+        break;
+      }
     }
     return error
 })

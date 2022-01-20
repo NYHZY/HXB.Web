@@ -2,14 +2,18 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/SysLogin.vue'
 import Home from '../views/Home.vue'
+import TestHome from '../views/TestHome.vue'
+import Utils from '../assets/js/SysUtils.js'
+import http from '../network/http.js'
+import Test from '../views/Test.vue'
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: Home
+    name: 'login',
+    component: Login
   },
   {
     path: '/home',
@@ -30,12 +34,15 @@ const routes = [
     component:()=>import('../components/TestTab.vue')
   },
   {
-    path:'/home',
-    name:'tabs',
-    component:Home
+    path:'/testhome',
+    name:'testhome',
+    component:TestHome
   }
-]
+];
 
+(()=>{
+  
+})();
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
